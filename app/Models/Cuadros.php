@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Cuadros extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre','descripcion'];
+    protected $fillable = ['nombre','descripcion','category_id'];
 
     public function categorias (){
-        return $this->belongsTo(Cuadros::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
 
     }
 }

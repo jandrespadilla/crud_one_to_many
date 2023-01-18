@@ -13,7 +13,7 @@ use App\Http\Controllers\Api\CuadrosController;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
-Route::get('/', [CuadrosController::class,'index']);
+});
+//Route::get('/', [CuadrosController::class,'index']);

@@ -15,5 +15,5 @@ Route::resource('cuadros',CuadrosController::class)
 /*Route::resource('register',AuthController::class)
             ->only(['register','login', 'userProfile','logout','allUser']);   
 */
-Route::get('register',[AuthController::class,'register']);
+Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);

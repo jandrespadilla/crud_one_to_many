@@ -44,23 +44,7 @@
                         </g>
                     </svg>
                 </div>
-                <h2>Cuadros</h2>
-                    <table>
-                            <thead>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Categoria</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($cuadros as $cuadro)
-                                <tr>
-                                    <td>{{$cuadro->nombre}}</td>
-                                    <td>{{$cuadro->descripcion}}</td>
-                                    <td>{{$cuadro->categorias->nombre}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                    </table>
+             
                  
 
                 </div>

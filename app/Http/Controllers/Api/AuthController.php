@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-//use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -15,19 +16,18 @@ class AuthController extends Controller
             "email" => "required|email|unique:users",
             "password" => "required"
         ]);
-    
-  /**/
-     
+       
         //alta de usuario
-       // $user = new User();
-       // $user->name = $request->name;
-      //  $user->email = $request->email;
-       // $user->password = $request->password;
-       // $user->save();
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
         //respuesta de la registracion
+   
         return response()->json([
-            'message' => 'pasado'
-        ]);
+            'message' => $user
+        ],Response::HTTP_OK);        
     }
 
     public function login(Request $request){

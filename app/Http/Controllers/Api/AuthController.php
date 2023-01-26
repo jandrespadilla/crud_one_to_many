@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -14,7 +15,7 @@ class AuthController extends Controller
        $request->validate([
             "name" => "required",
             "email" => "required|email|unique:users",
-            "password" => "required"
+            "password" => "required|confirmed"
         ]);
        
         //alta de usuario
@@ -31,11 +32,40 @@ class AuthController extends Controller
     }
 
     public function login(Request $request){
+      // validar el reques
+      $credenciales=  $request->validate([
+        "email" => ["required","email"],
+        "password" => ["required"]
+       ]);
+      // loguearse
       
+      if(Auth::attempt($credenciales)){
+            $user=Auth::user();
+            $token=$user->createToken('token')->plainTextToken;
+            $cookie=cookie('cookie_token',$token,60*24);
+            return response()->json([
+                'token' => $token
+            ],Response::HTTP_OK)->withoutCookie($cookie); 
+
+      }else {
+        # respuesta no autorizado
+            return response([
+                'message' => 'Credenciales no validas'
+            ],Response::HTTP_UNAUTHORIZED);
+      }
+
+
+      //responder
+
+
+
     }
 
     public function userProfile(Request $request){
- 
+        return response()->json([
+            'message' => 'userProfile Ox',
+            'userData' => auth()->user
+        ],Response::HTTP_OK);        
     }
     public function logout( ){
  

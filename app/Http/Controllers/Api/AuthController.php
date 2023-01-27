@@ -63,8 +63,8 @@ class AuthController extends Controller
 
     public function userProfile(Request $request){
         return response()->json([
-            'message' => 'userProfile Ox',
-            'userData' => auth()->user
+            'message' => 'userProfile Ok',
+            'userData' => auth()->user()
         ],Response::HTTP_OK);        
     }
     public function logout( ){
